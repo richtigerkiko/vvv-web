@@ -1,0 +1,41 @@
+form {
+    label{
+        display: block;
+    }
+    input{
+        background-color: #1d2223;
+        height: 2.8em;
+        padding: 3px 6px;
+        border-radius: 5px;
+        border: 0;
+        color: $baseText;
+        outline: none;
+    }
+
+}
+
+.auth{
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: -300px;
+
+    align-self: center;
+
+    justify-content: center;
+    justify-self: center;
+    
+    form {
+        width: 85%;
+    }
+    div{
+        margin-bottom: 1em;
+    }
+        
+    label{
+        font-size: 9pt;
+    }
+    input{
+        margin: 5px 0px;
+        width: 100%;
+    }
+}

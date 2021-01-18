@@ -1,0 +1,47 @@
+#home {
+    .title {
+        text-align: center;
+        padding-top: 5em;
+        $letterSpace: 1em;
+
+        h1,
+        h2 {
+            font-weight: 400;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            letter-spacing: $letterSpace;
+            font-size: 30pt;
+            text-indent: $letterSpace;
+        }
+        h2 {
+            font-size: 17px;
+            margin-top: -12px;
+        }
+    }
+    .menu{
+        color: #647f87;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        text-align: center;
+
+        font-weight: 600;
+        font-size: 16pt;
+        
+        margin: 0 10px;
+
+        height: 20em;
+
+        align-content: center;
+
+        .menuitem{
+            width: 100%;
+            background-color: #fff;
+            height: 5em;
+            line-height: 5em;
+        }
+    }
+}

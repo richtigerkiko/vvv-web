@@ -1,0 +1,25 @@
+type Training @model @auth(rules: [{allow: public}]){
+    id: ID!
+    start: AWSDate
+    displayName: String!
+    rounds: Int
+    pauseDuration: AWSTime
+    totalDuration: AWSTime
+    exercises: [Exercise] @connection(keyName: "byTraining", fields: ["id"])
+}
+type Exercise @model @key(name: "byTraining", fields: ["trainingID"]) @auth(rules: [{allow: public}]){
+    id: ID!
+    displayName: String!
+    iconUrl: String
+    exerciseDuration: AWSTime
+    state: ExerciseState
+    trainingID: ID!
+    training: Training @connection(fields: ["trainingID"])
+}
+
+enum ExerciseState {
+    NOTSTARTET,
+    STARTED,
+    PAUSED,
+    ENDED
+}
