@@ -5,12 +5,15 @@ body {
     margin: 0px;
     padding: 0px;
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 body {
-    font-family: "Open Sans";
+    font-family: 'Open Sans', sans-serif;
     color: $baseText;
     background-color: $baseBackground;
 }
+
+
+
 #app {
     height: 100%;
     display: grid;
