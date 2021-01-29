@@ -95,7 +95,7 @@ export default defineComponent({
     },
   methods: {
     addExercise() {
-        let defaultDuration = "00:30"
+        let defaultDuration = "00:00:30"
      if(this.training.exercises![this.training.exercises!.length - 1]){
          defaultDuration = this.training.exercises![this.training.exercises!.length! - 1]!.exerciseDuration as string
      }
@@ -113,14 +113,11 @@ export default defineComponent({
       }
     },
     goToRound(){
-      this.$router.push({name: "round"})
+      this.$router.push({name: "training.round"})
     },
     saveTraining(){
       return null
     }
-  },
-  mounted() {
-    this.addExercise()
   }
 })
 </script>

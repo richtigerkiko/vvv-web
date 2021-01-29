@@ -11,9 +11,11 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import Clock from '@/components/training/Clock.vue'
-import { trainingStore } from '@/store/trainingStore'
 import { Exercise, Training } from '@/models/index'
 import { ExercisePause } from '@/data'
+
+import  horn01URL from '@/assets/audio/horns/horn01.mp3'
+import  pause01URL from '@/assets/audio/pause/pause01.mp3'
 
 export default defineComponent({
     props: {
@@ -27,27 +29,41 @@ export default defineComponent({
             currentExercise: {} as Exercise,
             isPause: true,
             currentExerciseIndex: 0,
-            nextExercise: {} as Exercise
+            nextExercise: {} as Exercise,
+            horn01Sound: new Audio(horn01URL),
+            pause01Sound: new Audio(pause01URL)
         }
     },
     methods: {
         changeExerciseClock(){
             if(this.isPause){
-                this.isPause = false
-                this.currentExercise = new ExercisePause(this.training.pauseDuration!)
-                this.nextExercise = this.training.exercises![this.currentExerciseIndex]!
+                this.goNextSet()
             }
             else{
                 if(this.currentExerciseIndex < this.training.exercises!.length){
-                    this.isPause = true
-                    this.currentExercise = this.training.exercises![this.currentExerciseIndex]!
-                    this.currentExerciseIndex++ 
-                    this.nextExercise = this.training.exercises![this.currentExerciseIndex]!
+                    this.goPause()
                 }
                 else{
-                    this.$emit('finishedRound')
+                    this.goFinish()
                 }
             }
+        },
+        goPause(){
+            this.horn01Sound.play()
+            this.isPause = true
+            this.currentExercise = this.training.exercises![this.currentExerciseIndex]!
+            this.currentExerciseIndex++ 
+            if(this.currentExerciseIndex < this.training.exercises!.length)
+            this.nextExercise = this.training.exercises![this.currentExerciseIndex]!
+        },
+        goNextSet() {
+                this.pause01Sound.play()
+                this.isPause = false
+                this.currentExercise = new ExercisePause(this.training.pauseDuration!)
+                this.nextExercise = this.training.exercises![this.currentExerciseIndex]!
+        },
+        goFinish() {
+            this.$emit('finishedRound')
         }
     },
     components:{
