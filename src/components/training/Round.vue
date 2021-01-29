@@ -1,7 +1,10 @@
 <template>
     <div id="Round">
         <Clock :canvasID="index" :exercise="currentExercise" @countdownReady="changeExerciseClock" :key="currentExercise.id"/>
+        <p>Current</p>
         <h3>{{ currentExercise.displayName }}</h3>
+        <p>Next</p>
+        <h3>{{ nextExercise.displayName }}</h3>
     </div>
 </template>
 
@@ -23,7 +26,8 @@ export default defineComponent({
         return {
             currentExercise: {} as Exercise,
             isPause: true,
-            currentExerciseIndex: 0
+            currentExerciseIndex: 0,
+            nextExercise: {} as Exercise
         }
     },
     methods: {
@@ -31,12 +35,14 @@ export default defineComponent({
             if(this.isPause){
                 this.isPause = false
                 this.currentExercise = new ExercisePause(this.training.pauseDuration!)
+                this.nextExercise = this.training.exercises![this.currentExerciseIndex]!
             }
             else{
                 if(this.currentExerciseIndex < this.training.exercises!.length){
                     this.isPause = true
                     this.currentExercise = this.training.exercises![this.currentExerciseIndex]!
                     this.currentExerciseIndex++ 
+                    this.nextExercise = this.training.exercises![this.currentExerciseIndex]!
                 }
                 else{
                     this.$emit('finishedRound')
