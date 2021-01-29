@@ -1,11 +1,11 @@
-#baseContent{
+#baseContent {
     display: grid;
     grid-template-rows: 40px 60px auto;
 
-    .title{
+    .title {
         text-align: center;
         $letterSpace: 1em;
-        h1{
+        h1 {
             padding-top: 0.5em;
             line-height: 15pt;
             font-size: 16pt;
@@ -13,7 +13,7 @@
             text-indent: $letterSpace - 0.5;
             font-weight: 400;
         }
-        h2{
+        h2 {
             margin: 0;
             padding: 0;
             padding-top: 0.2em;
@@ -22,6 +22,5 @@
             text-indent: $letterSpace - 0.8;
             font-weight: 400;
         }
-
     }
 }

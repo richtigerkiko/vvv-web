@@ -25,7 +25,7 @@ export declare class Exercise {
   readonly id: string;
   readonly displayName: string;
   readonly iconUrl?: string;
-  readonly exerciseDuration?: string;
+  readonly exerciseDuration: string;
   readonly state?: ExerciseState | keyof typeof ExerciseState;
   readonly training?: Training;
   constructor(init: ModelInit<Exercise>);

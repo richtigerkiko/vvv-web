@@ -1,0 +1,78 @@
+#trainingForm{
+    padding: 1em;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    button{
+        height: 3.25em;
+        width: 40px;
+    }
+    .baseSettings{
+        grid-row: 1/2;
+        label {
+            margin-right: 0.5em;
+        }
+        .trainingtitleinput{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1em;
+            input {
+                flex: 2;
+            }
+        }
+        .roundsandpause{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1em;
+            justify-content: space-between;
+            div {
+                margin-right:10px;
+            }
+        }
+    }
+    .exercises {
+        align-self: stretch;
+        width: 100%;
+        grid-row: 2/3;
+
+        .excersise{
+            margin-bottom: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .addexcersise{
+            margin-top: 0.5em;
+            
+        margin-bottom: 1em;
+            width: 100%;
+            text-align: center;
+        }
+    }
+    .gosave{
+        grid-row: 3/4;
+        justify-self: end;
+        width: 100%;
+        text-align: center;
+
+        button {
+            width:auto;
+            text-align: center;
+            font-size: 16pt;
+            padding: 1em 1em;
+        }
+    }
+    
+
+    input, button {
+        background-color: #1d2223;
+        height: 2.8em;
+        padding: 3px 5px;
+        border-radius: 5px;
+        border: 0;
+        color: #fff;
+        outline: none;
+    }
+}

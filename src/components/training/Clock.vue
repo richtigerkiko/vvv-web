@@ -1,6 +1,6 @@
 <template>
   <canvas
-    id="timerclock"
+    :id="'timerclock' + canvasID"
     :width="canvasSize"
     :height="canvasSize"
     style="margin: 0px auto; display: block;"
@@ -9,13 +9,17 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Exercise} from '@/data/interfaces/Training'
-import { getSecondsFromTimeString } from '@/functions/time/calctime.ts'
+import { Exercise} from '@/models/index'
+import { getSecondsFromTimeString } from '@/functions/time'
 
 export default defineComponent({
   props: {
     exercise: {
-        type: Object as PropType<Exercise>
+        type: Object as PropType<Exercise>,
+        required: true
+    },
+    canvasID: {
+        type: String
     }
   },
   data() {
@@ -28,14 +32,14 @@ export default defineComponent({
   computed: {
     ctx(): CanvasRenderingContext2D {
       return (document.getElementById(
-        "timerclock"
+        "timerclock" + this.canvasID
       )! as HTMLCanvasElement).getContext("2d")!;
     },
     radius(): number {
       return this.canvasSize / 2;
     },
     endTime(): Date {
-      return new Date(this.startTime.getTime() + getSecondsFromTimeString(this.exercise!.exerciseDuration) * 1000);
+      return new Date(this.startTime.getTime() + getSecondsFromTimeString(this.exercise.exerciseDuration) * 1000);
     }
   },
   methods: {
@@ -94,7 +98,7 @@ export default defineComponent({
     },
     calcRemainingPercentOfTime(): number {
       const remainingSeconds = this.calcremainingSeconds();
-      return (remainingSeconds / getSecondsFromTimeString(this.exercise!.exerciseDuration)) * 100;
+      return (remainingSeconds / getSecondsFromTimeString(this.exercise.exerciseDuration)) * 100;
     }
   },
   mounted() {

@@ -11,7 +11,7 @@ type Exercise @model @key(name: "byTraining", fields: ["trainingID"]) @auth(rule
     id: ID!
     displayName: String!
     iconUrl: String
-    exerciseDuration: AWSTime
+    exerciseDuration: AWSTime!
     state: ExerciseState
     trainingID: ID!
     training: Training @connection(fields: ["trainingID"])

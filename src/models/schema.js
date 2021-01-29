@@ -113,7 +113,7 @@ export const schema = {
                     "name": "exerciseDuration",
                     "isArray": false,
                     "type": "AWSTime",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "state": {
