@@ -1,5 +1,6 @@
 <template>
     <div id="Round">
+        <h3>{{ currentRound }}</h3>
         <Clock :canvasID="index" :exercise="currentExercise" @countdownReady="changeExerciseClock" :key="currentExercise.id"/>
         <p>Current</p>
         <h3>{{ currentExercise.displayName }}</h3>
@@ -22,6 +23,10 @@ export default defineComponent({
         training: {
             type: Object as PropType<Training>,
             required: true
+        },
+        currentRound: {
+            type: Number,
+            default: 0
         }
     },
     data() {
@@ -36,7 +41,7 @@ export default defineComponent({
     },
     methods: {
         changeExerciseClock(){
-            if(this.isPause){
+            if(this.isPause && this.currentExerciseIndex < this.training.exercises!.length){
                 this.goNextSet()
             }
             else{

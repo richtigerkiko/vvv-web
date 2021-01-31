@@ -8,7 +8,7 @@
         <div class="roundsandpause">
           <div class="pauseinput">
             <label for="pauseinput">pause:</label>
-            <input type="time" id="pauseinput" v-model="training.pauseDuration"  step="1" min="00:00:00" max="00:12:00"/>
+            <DurationInput :defaultDuration="training.pauseDuration" @input-duration="training.pauseDuration = $event"/>
           </div>
           <div class="roundinput">
             <label for="roundinput">rounds:</label>
@@ -34,9 +34,9 @@
             type="text"
             name="exerciseName"
             placeholder="Name"
-            v-model="exercise.displayName"
+            v-model="exercise.displayName" style="width: 45%; margin: 0 2%;"
           />
-          <input type="time" v-model="exercise.exerciseDuration" step="1" min="00:00:00" max="00:12:00"/>
+          <DurationInput :defaultDuration="exercise.exerciseDuration" @input-duration="exercise.exerciseDuration = $event"/>
           <button @click="deleteExercise(exercise.id)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,18 +81,20 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Exercise, Training, ExerciseState } from "@/models/index"
+import { ExerciseState } from "@/models/index"
 import { trainingStore } from "@/store/trainingStore"
 import { v4 as uuid } from "@lukeed/uuid"
-import { createTraining } from '@/graphql/mutations'
-import { API } from "aws-amplify"
+import DurationInput from "@/components/inputs/DurationInput.vue"
 
 export default defineComponent({
-    setup(){
-        return {
-            training: trainingStore.getState()
-        }
-    },
+  setup(){
+      return {
+          training: trainingStore.getState()
+      }
+  },
+  components: {
+     DurationInput
+  },
   methods: {
     addExercise() {
         let defaultDuration = "00:00:30"
@@ -101,7 +103,7 @@ export default defineComponent({
      }
       this.training.exercises!.push({
         id: uuid(),
-        displayName: "laufen",
+        displayName: "",
         exerciseDuration: defaultDuration,
         state: ExerciseState.NOTSTARTET
       });
@@ -116,6 +118,7 @@ export default defineComponent({
       this.$router.push({name: "training.round"})
     },
     saveTraining(){
+      console.log(this.training)
       return null
     }
   }

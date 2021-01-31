@@ -1,5 +1,5 @@
 <template>
-    <Round :key="currentRound" @finishedRound="changeRound" :training="training"/>
+    <Round :key="currentRound" @finishedRound="changeRound" :currentRound="currentRound" :training="training"/>
 </template>
 
 <script lang="ts">
@@ -21,7 +21,7 @@ export default defineComponent({
     },
     methods: {
         changeRound(){
-            if(!this.isFinished){
+            if(this.isFinished){
                 return;
             }
             else{
